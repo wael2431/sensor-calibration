@@ -1,0 +1,24 @@
+# ESP-IDF build output and generated config
+build/
+sdkconfig
+sdkconfig.old
+dependencies.lock
+managed_components/
+
+# Rust (calib_rs)
+components/calib_rs/target/
+components/calib_rs/Cargo.lock
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Editor settings (machine-specific)
+.vscode/
+
+# Local data and calibration outputs
+data.csv
+cal.json
+*.csv

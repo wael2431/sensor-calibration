@@ -1,0 +1,112 @@
+menu "Application"
+
+    config APP_ACQ_PERIOD_MS
+        int "Sampling period (ms)"
+        default 2000
+        range 1000 60000
+        help
+            The DHT11 (polynomial input) cannot be read more than once per second
+            and its read blocks the acquisition task for ~25 ms: it sets the pace.
+
+    config APP_QUEUE_RAW_LEN
+        int "Acquisition -> processing queue size (samples)"
+        default 16
+        range 2 256
+
+    config APP_QUEUE_CAL_LEN
+        int "Processing -> communication queue size (measurements)"
+        default 16
+        range 2 256
+
+    config APP_QUEUE_RX_LEN
+        int "Transport receive queue size (64-byte blocks)"
+        default 32
+        range 4 512
+
+    menu "Sensors"
+
+        config SENSOR_DHT11_GPIO
+            int "DHT11 (polynomial input): data GPIO (4.7 to 10 kOhm pull-up to 3V3)"
+            default 10
+
+        config APP_COLLECT_REF
+            bool "Collect mode: also read the BME280 (reference)"
+            default y
+            help
+                Enabled: the BME280 is read and sent with every measurement, so that the PC
+                can fit the polynomial BME280 = f(DHT11).
+                Disabled (production): only the DHT11 is read; the BME280 value is estimated
+                by the polynomial. The BME280 can then be unplugged.
+
+        config SENSOR_BME280_SDA
+            int "BME280 (I2C): SDA GPIO"
+            depends on APP_COLLECT_REF
+            default 18
+
+        config SENSOR_BME280_SCL
+            int "BME280 (I2C): SCL GPIO"
+            depends on APP_COLLECT_REF
+            default 19
+
+        config SENSOR_BME280_ADDR
+            hex "BME280 (I2C): 7-bit address (0x76 if SDO=GND, 0x77 if SDO=VDDIO)"
+            depends on APP_COLLECT_REF
+            default 0x76
+
+        config SENSOR_BME280_FREQ
+            int "BME280 (I2C): clock frequency (Hz)"
+            depends on APP_COLLECT_REF
+            default 400000
+
+    endmenu
+
+    menu "Transports"
+
+        config APP_TRANSPORT_UART
+            bool "Enable the UART transport"
+            default y
+
+        config APP_UART_NUM
+            int "UART number"
+            depends on APP_TRANSPORT_UART
+            default 1
+            range 0 1
+            help
+                ESP32-C6: UART0 is usually used for the console/logs,
+                use UART1 for data.
+
+        config APP_UART_TX_GPIO
+            int "UART: TX GPIO"
+            depends on APP_TRANSPORT_UART
+            default 6
+
+        config APP_UART_RX_GPIO
+            int "UART: RX GPIO"
+            depends on APP_TRANSPORT_UART
+            default 7
+
+        config APP_UART_BAUD
+            int "UART: baud rate (8N1, no flow control)"
+            depends on APP_TRANSPORT_UART
+            default 115200
+            range 1200 5000000
+
+        config APP_TRANSPORT_BLE
+            bool "Enable the BLE transport (NimBLE GATT)"
+            depends on BT_NIMBLE_ENABLED
+            default n
+
+        config APP_BLE_DEVICE_NAME
+            string "BLE: device name"
+            depends on APP_TRANSPORT_BLE
+            default "calib-node"
+
+        config APP_BLE_MTU
+            int "BLE: preferred MTU"
+            depends on APP_TRANSPORT_BLE
+            default 247
+            range 23 517
+
+    endmenu
+
+endmenu
