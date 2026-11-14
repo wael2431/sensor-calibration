@@ -1,0 +1,5 @@
+# Optional regeneration of include/calib.h:
+#   cbindgen --config cbindgen.toml --crate calib_rs --output include/calib.h
+language = "C"
+include_guard = "CALIB_H"
+sys_includes = ["stdint.h", "stddef.h"]

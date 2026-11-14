@@ -1,0 +1,27 @@
+# ESP-IDF Build Artifacts & Configs
+build/
+sdkconfig
+sdkconfig.old
+.ninja_deps
+.ninja_log
+
+# Rust Build Artifacts
+projet_poly/components/calib_rs/target/
+projet_poly/components/calib_rs/Cargo.lock
+
+# Python Caches & Environments
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+venv/
+env/
+
+# Local Configuration Files
+projet_poly/tools/host_sender/calibration.json
+
+# OS & Editor Files
+.vscode/
+.idea/
+.DS_Store
