@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ESP-IDF Build Artifacts & Configs
 build/
 sdkconfig
@@ -25,3 +26,29 @@ projet_poly/tools/host_sender/calibration.json
 .vscode/
 .idea/
 .DS_Store
+=======
+# ESP-IDF build output and generated config
+build/
+sdkconfig
+sdkconfig.old
+dependencies.lock
+managed_components/
+
+# Rust (calib_rs)
+components/calib_rs/target/
+components/calib_rs/Cargo.lock
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Editor settings (machine-specific)
+.vscode/
+
+# Local data and calibration outputs
+data.csv
+cal.json
+*.csv
+>>>>>>> d39c724111eeb73e4dfc10bed5ba550955f2ee84

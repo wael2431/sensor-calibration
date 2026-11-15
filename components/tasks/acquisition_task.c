@@ -1,6 +1,10 @@
 /* Periodic read of the DHT11 (polynomial input) and, in collect mode, of the BME280 (reference).
  * The DHT11 sets the pace (>= 1 s, ~25 ms blocking read). The BME280 is read right after:
+<<<<<<< HEAD
  * each sample then holds a nearly simultaneous (a, ref) pair, usable to compute the calibration. */
+=======
+ * each sample then holds a nearly simultaneous (a, ref) pair, usable by the fit. */
+>>>>>>> d39c724111eeb73e4dfc10bed5ba550955f2ee84
 #include "esp_log.h"
 #include "esp_timer.h"
 #include "freertos/FreeRTOS.h"

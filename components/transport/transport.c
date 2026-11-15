@@ -3,8 +3,13 @@
 #include "sdkconfig.h"
 
 static const transport_t *const s_list[] = {
+<<<<<<< HEAD
 #if CONFIG_APP_TRANSPORT_USB
     &transport_usb,
+=======
+#if CONFIG_APP_TRANSPORT_UART
+    &transport_uart,
+>>>>>>> d39c724111eeb73e4dfc10bed5ba550955f2ee84
 #endif
 #if CONFIG_APP_TRANSPORT_BLE
     &transport_ble,

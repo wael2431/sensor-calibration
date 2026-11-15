@@ -24,7 +24,11 @@ typedef struct {
     bool      (*is_connected)(void);   /* link ready to transmit (UART: always true; BLE: subscribed) */
 } transport_t;
 
+<<<<<<< HEAD
 extern const transport_t transport_usb;
+=======
+extern const transport_t transport_uart;
+>>>>>>> d39c724111eeb73e4dfc10bed5ba550955f2ee84
 extern const transport_t transport_ble;
 
 /* List of enabled transports (Kconfig), NULL-terminated. `count` is optional. */

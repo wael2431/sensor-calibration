@@ -1,13 +1,22 @@
+<<<<<<< HEAD
 """PC-side functions (no serial port): frames, calibration blob, calibration file, fixed-point evaluation.
+=======
+"""PC-side protocol and firmware-compatible calibration utilities (no serial port).
+>>>>>>> d39c724111eeb73e4dfc10bed5ba550955f2ee84
 
 Model (identical to the firmware): for each channel, the BME280 value is estimated from the DHT11:
     x = clamp((a - a_min) / (a_max - a_min), 0, 1)      Q16.16
     y = c0 + x*(c1 + x*(c2 + x*c3))                     Horner, c[k] in Q16.16
     y = clamp(round(y), y_min, y_max)
+<<<<<<< HEAD
 Firmware units: 0.01 °C (channel 0, temperature) and 0.01 %RH (channel 1, humidity).
 Calibration files use physical units (°C, %RH) and are converted by `load_calibration`.
 """
 import math
+=======
+Units: 0.01 °C (channel 0, temperature) and 0.01 %RH (channel 1, humidity).
+"""
+>>>>>>> d39c724111eeb73e4dfc10bed5ba550955f2ee84
 import struct
 import zlib
 
@@ -21,6 +30,10 @@ I32_MIN, I32_MAX = -(2 ** 31), 2 ** 31 - 1
 ERRORS = {-1: "NULL", -2: "LEN", -3: "MAGIC", -4: "VERSION", -5: "CRC", -6: "CHANNELS",
           -7: "RANGE (invalid range or bounds)", -8: "DIVERGES (polynomial out of bounds)",
           -100: "NVS", -101: "UNKNOWN_TYPE"}
+<<<<<<< HEAD
+=======
+CH_NAMES = ["temperature (0.01 °C)", "humidity (0.01 %RH)"]
+>>>>>>> d39c724111eeb73e4dfc10bed5ba550955f2ee84
 
 
 # ------------------------------------------------------------------------- COBS
@@ -174,6 +187,7 @@ def validate_channel(ch):
             return -8
     return None
 
+<<<<<<< HEAD
 
 # ------------------------------------------------- calibration file (physical units)
 CHANNEL_LABELS = ["temperature", "humidity"]
@@ -267,3 +281,5 @@ def load_calibration(path: str):
         except ValueError as e:
             raise ValueError(f"{path}: channel {i} ({CHANNEL_LABELS[i]}): {e}")
     return out
+=======
+>>>>>>> d39c724111eeb73e4dfc10bed5ba550955f2ee84

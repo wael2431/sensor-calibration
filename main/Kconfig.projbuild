@@ -34,7 +34,11 @@ menu "Application"
             default y
             help
                 Enabled: the BME280 is read and sent with every measurement, so that the PC
+<<<<<<< HEAD
                 can compute the polynomial BME280 = f(DHT11).
+=======
+                can fit the polynomial BME280 = f(DHT11).
+>>>>>>> d39c724111eeb73e4dfc10bed5ba550955f2ee84
                 Disabled (production): only the DHT11 is read; the BME280 value is estimated
                 by the polynomial. The BME280 can then be unplugged.
 
@@ -46,10 +50,14 @@ menu "Application"
         config SENSOR_BME280_SCL
             int "BME280 (I2C): SCL GPIO"
             depends on APP_COLLECT_REF
+<<<<<<< HEAD
             default 21
             help
                 Changed from 19 to 21. GPIO 19 and 20 are reserved for the 
                 ESP32-C6 Native USB Serial/JTAG port (D- and D+).
+=======
+            default 19
+>>>>>>> d39c724111eeb73e4dfc10bed5ba550955f2ee84
 
         config SENSOR_BME280_ADDR
             hex "BME280 (I2C): 7-bit address (0x76 if SDO=GND, 0x77 if SDO=VDDIO)"
@@ -65,6 +73,7 @@ menu "Application"
 
     menu "Transports"
 
+<<<<<<< HEAD
         config APP_TRANSPORT_USB
             bool "Enable the Native USB Serial/JTAG transport"
             default y
@@ -72,6 +81,36 @@ menu "Application"
                 Uses the built-in USB Serial/JTAG port on the ESP32-C6.
                 Hardware pins are fixed (GPIO19 = D-, GPIO20 = D+).
                 Baud rate and flow control are handled automatically.
+=======
+        config APP_TRANSPORT_UART
+            bool "Enable the UART transport"
+            default y
+
+        config APP_UART_NUM
+            int "UART number"
+            depends on APP_TRANSPORT_UART
+            default 1
+            range 0 1
+            help
+                ESP32-C6: UART0 is usually used for the console/logs,
+                use UART1 for data.
+
+        config APP_UART_TX_GPIO
+            int "UART: TX GPIO"
+            depends on APP_TRANSPORT_UART
+            default 6
+
+        config APP_UART_RX_GPIO
+            int "UART: RX GPIO"
+            depends on APP_TRANSPORT_UART
+            default 7
+
+        config APP_UART_BAUD
+            int "UART: baud rate (8N1, no flow control)"
+            depends on APP_TRANSPORT_UART
+            default 115200
+            range 1200 5000000
+>>>>>>> d39c724111eeb73e4dfc10bed5ba550955f2ee84
 
         config APP_TRANSPORT_BLE
             bool "Enable the BLE transport (NimBLE GATT)"
@@ -91,4 +130,8 @@ menu "Application"
 
     endmenu
 
+<<<<<<< HEAD
 endmenu
+=======
+endmenu
+>>>>>>> d39c724111eeb73e4dfc10bed5ba550955f2ee84
