@@ -76,8 +76,7 @@ idf.py menuconfig          # sampling period, sensors, UART / BLE
 idf.py build flash monitor
 pip install -r tools/host_sender/requirements.txt
 ```
-Default wiring: DHT11 on GPIO10 (with a 4.7-10 kOhm pull-up), BME280 on I2C (SDA GPIO18, SCL GPIO19), UART1 on
-GPIO6 / GPIO7 to a USB-serial adapter.
+Default wiring: DHT11 on GPIO10 (with a 4.7-10 kOhm pull-up), BME280 on I2C (SDA GPIO18, SCL GPIO21),.
 
 Two commands (use your own serial port, for example `COM3` on Windows):
 ```
